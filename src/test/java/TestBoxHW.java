@@ -160,7 +160,7 @@ public class TestBoxHW extends tests.TestBase {
     @Test
     public void shouldShowValidationErrorWhenInvalidEmailIsEnteredTestEasyForm() {
         open("/text-box");
-        $("#userEmail").setValue("pavelqa");
+        $("#userEmail").setValue("pavelqaa");
         $("#submit").click();
         $("#userEmail").shouldHave(cssClass("field-error"))
                 .shouldHave(cssClass("form-control"));
