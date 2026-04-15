@@ -18,7 +18,7 @@ public class TestBoxHW extends tests.TestBase {
         $("#lastName").setValue("Yatmanov");
         $("#userEmail").setValue("pavelqa41@qa.com");
         $("#userNumber").setValue("9012311110");
-        $(".form-check #gender-radio-1").click();
+        $("#genterWrapper").$(byText("Male")).click();
 
         $("#dateOfBirthInput").click();
         $(".react-datepicker__year-select").selectOption("1992");
@@ -27,8 +27,10 @@ public class TestBoxHW extends tests.TestBase {
 
         $(".subjects-auto-complete__input").setValue("A")
                 .pressEnter();
-        $(".col-md-9 #hobbies-checkbox-1").click();
-        $(".col-md-9 #hobbies-checkbox-2").click();
+
+        $("#hobbiesWrapper").$(byText("Sports")).click();
+        $("#hobbiesWrapper").$(byText("Reading")).click();
+
         $("#uploadPicture").uploadFromClasspath("doppp.jpg");
 
         $("#currentAddress").setValue("Ablukova street");
@@ -39,46 +41,17 @@ public class TestBoxHW extends tests.TestBase {
 
         $("#submit").click();
 
-        $(".table-dark")
-                .$$("tr")
-                .findBy(text("Student Name"))
-                .shouldHave(text("Pavel"));
-        $(".table-dark")
-                .$$("tr")
-                .findBy(text("Student Email"))
-                .shouldHave(text("pavelqa41@qa.com"));
-        $(".table-dark")
-                .$$("tr")
-                .findBy(text("Gender"))
-                .shouldHave(text("Male"));
-        $(".table-dark")
-                .$$("tr")
-                .findBy(text("Mobile"))
-                .shouldHave(text("9012311110"));
-        $(".table-dark")
-                .$$("tr")
-                .findBy(text("Hobbies"))
-                .shouldHave(text("Sports, Reading"));
-        $(".table-dark")
-                .$$("tr")
-                .findBy(text("Date of Birth"))
-                .shouldHave(text("19 January,1992"));
-        $(".table-dark")
-                .$$("tr")
-                .findBy(text("Subjects"))
-                .shouldHave(text("Maths"));
-        $(".table-dark")
-                .$$("tr")
-                .findBy(text("Picture"))
-                .shouldHave(text("doppp.jpg"));
-        $(".table-dark")
-                .$$("tr")
-                .findBy(text("Address"))
-                .shouldHave(text("Ablukova street"));
-        $(".table-dark")
-                .$$("tr")
-                .findBy(text("State and City"))
-                .shouldHave(text("Haryana Karnal"));
+        $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text("Pavel Yatmanov"));
+        $(".table-responsive").$(byText("Student Email")).parent().shouldHave(text("pavelqa41@qa.com"));
+        $(".table-responsive").$(byText("Gender")).parent().shouldHave(text("Male"));
+        $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text("9012311110"));
+        $(".table-responsive").$(byText("Hobbies")).parent().shouldHave(text("Sports, Reading"));
+        $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text("19 January,1992"));
+        $(".table-responsive").$(byText("Subjects")).parent().shouldHave(text("Maths"));
+        $(".table-responsive").$(byText("Picture")).parent().shouldHave(text("doppp.jpg"));
+        $(".table-responsive").$(byText("Address")).parent().shouldHave(text("Ablukova street"));
+        $(".table-responsive").$(byText("State and City")).parent().shouldHave(text("Haryana Karnal"));
+
 
     }
 
@@ -89,25 +62,13 @@ public class TestBoxHW extends tests.TestBase {
         $("#lastName").setValue("Yatmanov");
         $("#userEmail").setValue("pavelqa41@qa.com");
         $("#userNumber").setValue("9012311110");
-        $(".form-check #gender-radio-1").click();
+        $("#genterWrapper").$(byText("Male")).click();
         $("#submit").click();
 
-        $(".table-dark")
-                .$$("tr")
-                .findBy(text("Student Name"))
-                .shouldHave(text("Pavel"));
-        $(".table-dark")
-                .$$("tr")
-                .findBy(text("Student Email"))
-                .shouldHave(text("pavelqa41@qa.com"));
-        $(".table-dark")
-                .$$("tr")
-                .findBy(text("Gender"))
-                .shouldHave(text("Male"));
-        $(".table-dark")
-                .$$("tr")
-                .findBy(text("Mobile"))
-                .shouldHave(text("9012311110"));
+        $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text("Pavel Yatmanov"));
+        $(".table-responsive").$(byText("Student Email")).parent().shouldHave(text("pavelqa41@qa.com"));
+        $(".table-responsive").$(byText("Gender")).parent().shouldHave(text("Male"));
+        $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text("9012311110"));
     }
 
     @Test
@@ -124,15 +85,14 @@ public class TestBoxHW extends tests.TestBase {
 
     }
 
-
     //НЕГАТИВНЫЕ ТЕСТЫ
-
 
     @Test
     public void shouldShowValidationErrorsWhenAllRequiredFieldsAreEmptyTestHardForm() {
         open("/automation-practice-form");
-        $(".form-check #gender-radio-1").click();
+        $("#genterWrapper").$(byText("Male")).click();
         $("#submit").click();
+        $("#userForm").shouldHave(cssClass("was-validated"));
     }
 
     @Test
@@ -152,7 +112,7 @@ public class TestBoxHW extends tests.TestBase {
         $("#lastName").setValue("Yatmanov");
         $("#userEmail").setValue("pavelqa41@qa.com");
         $("#userNumber").setValue("9012311110");
-        $(".form-check #gender-radio-1").click();
+        $("#genterWrapper").$(byText("Male")).click();
         $("#submit").click();
         $("#userForm").shouldNotHave(cssClass("table-dark"));
     }
